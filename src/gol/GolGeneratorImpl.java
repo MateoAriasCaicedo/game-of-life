@@ -1,5 +1,8 @@
 package gol;
 
+import gol.GolGenerator;
+import gol.GolGrid;
+
 public class GolGeneratorImpl implements GolGenerator {
   private final GolGrid grid;
 

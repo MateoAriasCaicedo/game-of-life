@@ -21,7 +21,7 @@ public class GameConfiguration {
   /** The string value for the alive cells in the grid. */
   private final String population;
   /** The game matrix with the values for the alive and dead cells in the columns and rows. */
-  public int[][] gameGrid;
+  public GolGrid gameGrid;
 
   /**
    * Starts the game configuration with the given arguments array. Does not make any type of
@@ -104,17 +104,12 @@ public class GameConfiguration {
    * when the configuration is validated.
    */
   public void fillGameGrid() {
-    gameGrid = new int[height][width];
-    int currentRow = 0;
-    int currentRowIndex = 0;
-    for (int i = 0; i < population.length(); i++) {
-      if (population.charAt(i) == '#') {
-        currentRow++;
-        currentRowIndex = 0;
-      } else {
-        gameGrid[currentRow][currentRowIndex] = Character.getNumericValue(population.charAt(i));
-        currentRowIndex++;
-      }
+    int[][] newGrid = new int[height][width];
+    gameGrid = new GolGrid(newGrid, width, height);
+    if (Objects.equals(population, "rnd")) {
+      gameGrid.fillGridWithPopulation(generateRandomPopulation(width, height));
+    } else {
+      gameGrid.fillGridWithPopulation(population);
     }
   }
 
@@ -131,7 +126,7 @@ public class GameConfiguration {
 
   /** Prints the game grid in console. */
   public void printGameGrid() {
-    for (int[] row : gameGrid) {
+    for (int[] row : gameGrid.grid) {
       for (int value : row) {
         System.out.print(value);
       }

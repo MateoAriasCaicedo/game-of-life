@@ -40,7 +40,7 @@ public class ArgReaders {
    *     is repeated or not found, it returns null.
    */
   public static String readStringArg(String[] arguments, char argumentIdentifier) {
-    return readArgumentValue(arguments, argumentIdentifier).orElse(null);
+    return readArgumentValue(arguments, argumentIdentifier).orElse(ErrorReturns.stringErrorReturn);
   }
 
   /**
