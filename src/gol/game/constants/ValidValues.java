@@ -1,4 +1,4 @@
-package gol.constants;
+package gol.game.constants;
 
 /** Valid values for the game configurations. */
 public class ValidValues {

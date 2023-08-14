@@ -1,12 +1,12 @@
-package gol.readers;
+package gol.inputOutput.readers;
 
-import gol.constants.ErrorReturns;
-import gol.printers.ErrorPrinter;
+import gol.game.constants.ErrorReturns;
+import gol.inputOutput.printers.ErrorPrinter;
 
 import java.util.Optional;
 
 /** This class is used for reading the arguments from the args array. */
-public class ArgReaders {
+public class ArgumentReader {
   /**
    * Method for reading a value from the given arguments array. If the argument is repeated, not
    * found or can't be parsed to integer, it prints an error in the console.

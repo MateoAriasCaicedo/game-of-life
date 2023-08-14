@@ -1,4 +1,4 @@
-package gol.constants;
+package gol.game.constants;
 
 /**
  * Identifiers for the game arguments, which are the exact values for the arguments given in

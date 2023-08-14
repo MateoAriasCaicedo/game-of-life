@@ -1,4 +1,4 @@
-package gol.constants;
+package gol.game.constants;
 
 /** String constant values for the ansi color codes. */
 public class ColorCodes {

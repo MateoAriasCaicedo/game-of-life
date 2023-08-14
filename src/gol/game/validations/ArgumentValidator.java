@@ -1,10 +1,10 @@
-package gol.validations;
+package gol.game.validations;
 
-import gol.constants.ValidValues;
-import gol.printers.ErrorPrinter;
+import gol.game.constants.ValidValues;
+import gol.inputOutput.printers.ErrorPrinter;
 
 /** Class with the methods for validating the argument values. */
-public class ArgValidations {
+public class ArgumentValidator {
   /**
    * Method for validating all the game arguments. Prints if any validation goes wrong.
    *

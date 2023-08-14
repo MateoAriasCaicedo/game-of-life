@@ -1,12 +1,20 @@
-package gol;
+package gol.game;
 
-import gol.constants.GameValues;
+import gol.game.constants.GameValues;
 
+/** The gol grid class for representing the game grid. */
 public class GolGrid {
-  final int width;
-  final int height;
-  int[][] grid;
+  private final int width;
+  private final int height;
+  private int[][] grid;
 
+  /**
+   * Constructor for the gol grid.
+   *
+   * @param grid The matrix for the game grid.
+   * @param width The width of the grid.
+   * @param height The height of the grid.
+   */
   public GolGrid(int[][] grid, int width, int height) {
     this.grid = grid;
     this.width = width;
@@ -144,6 +152,7 @@ public class GolGrid {
     }
   }
 
+  /** Updates the grid life following the gol rules for evolution. */
   public void updateGridLife() {
     int[][] nextGenerationGrid = new int[height][width];
     for (int rowIndex = 0; rowIndex < grid.length; rowIndex++) {
@@ -152,7 +161,13 @@ public class GolGrid {
     grid = nextGenerationGrid;
   }
 
-  public void fillGridWithPopulation(String population) {
+  /**
+   * Fills the grid with the given population string. The string must follow a valid string
+   * representation for the population.
+   *
+   * @param population The string population.
+   */
+  public void fillGridWithPopulationString(String population) {
     int currentRow = 0;
     int currentRowColumn = 0;
     for (int i = 0; i < population.length(); i++) {
@@ -161,20 +176,34 @@ public class GolGrid {
         currentRowColumn = 0;
       } else {
         grid[currentRow][currentRowColumn] =
-            (population.charAt(i) == '1'
-                ? GameValues.ALIVE_CELL_INT
-                : GameValues.DEAD_CELL_INT);
+            (population.charAt(i) == '1' ? GameValues.ALIVE_CELL_INT : GameValues.DEAD_CELL_INT);
         currentRowColumn++;
       }
     }
   }
 
+  /**
+   * Returns a valid string renderer format for the grid.
+   *
+   * @return The string representation of the grid that follows the gol renderer format.
+   */
   public String toRendererFormat() {
-    StringBuilder rendererFormat = new StringBuilder();
-    for (int[] row : grid) {
-      for (int value : row) appendCorrespondingCharacter(value, rendererFormat);
-      appendNewRowCharacter(rendererFormat);
+    StringBuilder gridStringFormat = new StringBuilder();
+
+    for (int[] row : this.grid) {
+      for (int cell : row) appendCorrespondingCharacter(cell, gridStringFormat);
+      appendNewRowCharacter(gridStringFormat);
     }
-    return rendererFormat.toString();
+
+    return gridStringFormat.toString();
+  }
+
+  /**
+   * Method for getting the grid.
+   *
+   * @return The grid matrix.
+   */
+  public int[][] getGrid() {
+    return grid;
   }
 }

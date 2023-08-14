@@ -1,23 +1,28 @@
 package gol;
 
-import gol.printers.ErrorPrinter;
-import gol.printers.WelcomePrinter;
+import gol.game.configuration.GameConfiguration;
+import gol.game.generator.GolGeneratorImpl;
+import gol.inputOutput.printers.ErrorPrinter;
+import gol.inputOutput.printers.WelcomePrinter;
 
 public class GameOfLife {
 
   public static void main(String[] args) {
-    WelcomePrinter.printWelcome("¡This is The Game of Life!");
+    WelcomePrinter.printWelcome("This is The Game of Life!");
     var gameConfiguration = new GameConfiguration(args);
+
     if (gameConfiguration.hasValidConfiguration()) {
       gameConfiguration.fillGameGrid();
       gameConfiguration.printConfiguration();
-      var generator = new GolGeneratorImpl(gameConfiguration.gameGrid);
+
+      var generator = new GolGeneratorImpl(gameConfiguration.getGameGrid());
       var settings =
           new GolSettings(
-              gameConfiguration.width,
-              gameConfiguration.height,
-              gameConfiguration.speed,
-              gameConfiguration.generations);
+              gameConfiguration.getHeight(),
+              gameConfiguration.getWidth(),
+              gameConfiguration.getSpeed(),
+              gameConfiguration.getGenerations());
+
       SwingRenderer.render(generator, settings);
     } else {
       ErrorPrinter.printError("The game could not start.");

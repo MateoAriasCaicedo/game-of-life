@@ -1,6 +1,6 @@
-package gol.printers;
+package gol.inputOutput.printers;
 
-import gol.constants.ColorCodes;
+import gol.game.constants.ColorCodes;
 
 /** This class is used for printing errors and exceptions in console. */
 public class ErrorPrinter {

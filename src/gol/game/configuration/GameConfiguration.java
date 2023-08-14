@@ -1,27 +1,22 @@
-package gol;
+package gol.game.configuration;
 
-import gol.constants.ErrorReturns;
-import gol.constants.Identifiers;
-import gol.readers.ArgReaders;
-import gol.validations.ArgValidations;
+import gol.game.GolGrid;
+import gol.game.constants.ErrorReturns;
+import gol.game.constants.Identifiers;
+import gol.inputOutput.readers.ArgumentReader;
+import gol.game.validations.ArgumentValidator;
 
 import java.util.Objects;
 import java.util.Random;
 
 /** The game configuration class with the configuration values for starting the game. */
 public class GameConfiguration {
-  /** The width value for the game grid. */
-  public final int width;
-  /** The height value for the game grid. */
-  public final int height;
-  /** The game generations change speed in milliseconds. */
-  public final int speed;
-  /** The number of times in which the game grid wil evolve. */
-  public final int generations;
-  /** The string value for the alive cells in the grid. */
+  private final int width;
+  private final int height;
+  private final int speed;
+  private final int generations;
   private final String population;
-  /** The game matrix with the values for the alive and dead cells in the columns and rows. */
-  public GolGrid gameGrid;
+  private GolGrid gameGrid;
 
   /**
    * Starts the game configuration with the given arguments array. Does not make any type of
@@ -29,12 +24,12 @@ public class GameConfiguration {
    *
    * @param gameArguments The game arguments array.
    */
-  GameConfiguration(String[] gameArguments) {
-    width = ArgReaders.readNumericArgument(gameArguments, Identifiers.WIDTH_NAME);
-    height = ArgReaders.readNumericArgument(gameArguments, Identifiers.HEIGHT_NAME);
-    speed = ArgReaders.readNumericArgument(gameArguments, Identifiers.SPEED_NAME);
-    generations = ArgReaders.readNumericArgument(gameArguments, Identifiers.GENERATIONS_NAME);
-    String pop = ArgReaders.readStringArg(gameArguments, Identifiers.POPULATION_NAME);
+  public GameConfiguration(String[] gameArguments) {
+    width = ArgumentReader.readNumericArgument(gameArguments, Identifiers.WIDTH_NAME);
+    height = ArgumentReader.readNumericArgument(gameArguments, Identifiers.HEIGHT_NAME);
+    speed = ArgumentReader.readNumericArgument(gameArguments, Identifiers.SPEED_NAME);
+    generations = ArgumentReader.readNumericArgument(gameArguments, Identifiers.GENERATIONS_NAME);
+    String pop = ArgumentReader.readStringArg(gameArguments, Identifiers.POPULATION_NAME);
     population = Objects.equals(pop, "rnd") ? generateRandomPopulation(width, height) : pop;
   }
 
@@ -57,13 +52,6 @@ public class GameConfiguration {
     return population.toString();
   }
 
-  /**
-   * Generates random numbers between the min and the max.
-   *
-   * @param min The minimum value (inclusive).
-   * @param max The max value (exclusive).
-   * @return Returns the generated random number between the minimum and maximum value.
-   */
   private static int generateRandomNumber(int min, int max) {
     return new Random().nextInt(max) + min;
   }
@@ -96,7 +84,7 @@ public class GameConfiguration {
    * @return Returns true if the configuration has valid values, false if not.
    */
   public boolean hasValidValues() {
-    return ArgValidations.validateGameArguments(width, height, generations, speed, population);
+    return ArgumentValidator.validateGameArguments(width, height, generations, speed, population);
   }
 
   /**
@@ -107,9 +95,9 @@ public class GameConfiguration {
     int[][] newGrid = new int[height][width];
     gameGrid = new GolGrid(newGrid, width, height);
     if (Objects.equals(population, "rnd")) {
-      gameGrid.fillGridWithPopulation(generateRandomPopulation(width, height));
+      gameGrid.fillGridWithPopulationString(generateRandomPopulation(width, height));
     } else {
-      gameGrid.fillGridWithPopulation(population);
+      gameGrid.fillGridWithPopulationString(population);
     }
   }
 
@@ -126,11 +114,31 @@ public class GameConfiguration {
 
   /** Prints the game grid in console. */
   public void printGameGrid() {
-    for (int[] row : gameGrid.grid) {
+    for (int[] row : gameGrid.getGrid()) {
       for (int value : row) {
         System.out.print(value);
       }
       System.out.println();
     }
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public int getSpeed() {
+    return speed;
+  }
+
+  public int getGenerations() {
+    return generations;
+  }
+
+  public GolGrid getGameGrid() {
+    return gameGrid;
   }
 }

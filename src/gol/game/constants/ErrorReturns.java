@@ -1,4 +1,4 @@
-package gol.constants;
+package gol.game.constants;
 
 public class ErrorReturns {
   public static final int intErrorReturn = -2099999999;

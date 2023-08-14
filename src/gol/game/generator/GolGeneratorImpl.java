@@ -1,8 +1,9 @@
-package gol;
+package gol.game.generator;
 
 import gol.GolGenerator;
-import gol.GolGrid;
+import gol.game.GolGrid;
 
+/** Implementation of the GolGenerator interface. */
 public class GolGeneratorImpl implements GolGenerator {
   private final GolGrid grid;
 
@@ -12,9 +13,9 @@ public class GolGeneratorImpl implements GolGenerator {
 
   @Override
   public String getNextGenerationAsString(long l) {
-    String lGenerationString = grid.toRendererFormat();
+    String generationStringFormat = grid.toRendererFormat();
     grid.updateGridLife();
-    return lGenerationString;
+    return generationStringFormat;
   }
 }
 ;

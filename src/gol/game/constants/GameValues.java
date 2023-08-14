@@ -1,4 +1,4 @@
-package gol.constants;
+package gol.game.constants;
 
 public class GameValues {
   public static final int ALIVE_CELL_INT = 1;
