@@ -5,9 +5,10 @@ import gol.game.constants.ErrorReturns;
 import gol.game.constants.Identifiers;
 import gol.inputOutput.readers.ArgumentReader;
 import gol.game.validations.ArgumentValidator;
+import gol.utils.RandomGenerator;
+import gol.utils.Logger;
 
 import java.util.Objects;
-import java.util.Random;
 
 /** The game configuration class with the configuration values for starting the game. */
 public class GameConfiguration {
@@ -45,15 +46,11 @@ public class GameConfiguration {
     StringBuilder population = new StringBuilder();
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        population.append(generateRandomNumber(0, 2));
+        population.append(RandomGenerator.generateRandomNumber(0, 2));
       }
       if (i < height - 1) population.append("#");
     }
     return population.toString();
-  }
-
-  private static int generateRandomNumber(int min, int max) {
-    return new Random().nextInt(max) + min;
   }
 
   /**
@@ -103,12 +100,11 @@ public class GameConfiguration {
 
   /** Prints the game configuration values in console. */
   public void printConfiguration() {
-    System.out.println("The width is: " + width);
-    System.out.println("The height is: " + height);
-    System.out.println("The generations are: " + generations);
-    System.out.println("The speed is: " + speed);
-    System.out.println("The population is: " + population);
-    System.out.println("The game grid is:");
+    Logger.logConfigurationValue("The width is", width);
+    Logger.logConfigurationValue("The height is", height);
+    Logger.logConfigurationValue("The generations are", generations);
+    Logger.logConfigurationValue("The speed is", speed);
+    Logger.logConfigurationValue("The population is", population);
     printGameGrid();
   }
 
@@ -116,9 +112,9 @@ public class GameConfiguration {
   public void printGameGrid() {
     for (int[] row : gameGrid.getGrid()) {
       for (int value : row) {
-        System.out.print(value);
+        Logger.logGridCellValue(value);
       }
-      System.out.println();
+      Logger.logNewLine();
     }
   }
 

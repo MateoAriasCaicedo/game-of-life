@@ -18,4 +18,4 @@ public class GolGeneratorImpl implements GolGenerator {
     return generationStringFormat;
   }
 }
-;
+

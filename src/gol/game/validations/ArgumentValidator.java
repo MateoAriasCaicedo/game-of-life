@@ -5,6 +5,8 @@ import gol.inputOutput.printers.ErrorPrinter;
 
 /** Class with the methods for validating the argument values. */
 public class ArgumentValidator {
+  private ArgumentValidator() {}
+
   /**
    * Method for validating all the game arguments. Prints if any validation goes wrong.
    *

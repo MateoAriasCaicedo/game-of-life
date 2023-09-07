@@ -6,4 +6,6 @@ public class ValidValues {
   public static final int[] VALID_WIDTH_VALUES = {10, 20, 40, 80};
   /** Valid values for the grid height. */
   public static final int[] VALID_HEIGHT_VALUES = {10, 20, 40};
+
+  private ValidValues() {}
 }

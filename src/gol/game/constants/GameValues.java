@@ -7,4 +7,5 @@ public class GameValues {
   public static final char DEAD_CELL_CHAR = '.';
   public static final char NEW_ROW_CHAR = '\n';
 
+  private GameValues() {}
 }

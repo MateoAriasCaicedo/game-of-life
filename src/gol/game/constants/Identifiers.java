@@ -1,8 +1,8 @@
 package gol.game.constants;
 
 /**
- * Identifiers for the game arguments, which are the exact values for the arguments given in
- * the console.
+ * Identifiers for the game arguments, which are the exact values for the arguments given in the
+ * console.
  */
 public class Identifiers {
   /** Identifier for the width. */
@@ -15,4 +15,6 @@ public class Identifiers {
   public static final char SPEED_NAME = 's';
   /** Identifier for the population. */
   public static final char POPULATION_NAME = 'p';
+
+  private Identifiers() {}
 }

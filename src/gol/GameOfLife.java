@@ -9,14 +9,14 @@ public class GameOfLife {
 
   public static void main(String[] args) {
     WelcomePrinter.printWelcome("This is The Game of Life!");
-    var gameConfiguration = new GameConfiguration(args);
+    GameConfiguration gameConfiguration = new GameConfiguration(args);
 
     if (gameConfiguration.hasValidConfiguration()) {
       gameConfiguration.fillGameGrid();
       gameConfiguration.printConfiguration();
 
-      var generator = new GolGeneratorImpl(gameConfiguration.getGameGrid());
-      var settings =
+      GolGenerator generator = new GolGeneratorImpl(gameConfiguration.getGameGrid());
+      GolSettings settings =
           new GolSettings(
               gameConfiguration.getHeight(),
               gameConfiguration.getWidth(),

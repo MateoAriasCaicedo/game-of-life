@@ -10,4 +10,6 @@ public class ColorCodes {
   public static final String CYAN_COLOR = "\033[1;36m";
   /** String ansi color code for the yellow color. */
   public static final String YELLOW_COLOR = "\033[1;33m";
+
+  private ColorCodes() {}
 }

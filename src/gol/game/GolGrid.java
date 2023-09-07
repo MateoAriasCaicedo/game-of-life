@@ -53,6 +53,41 @@ public class GolGrid {
         + topRightValue(cellRowIndex, cellColumnIndex, grid);
   }
 
+  private static int[] updateRowLife(int[][] grid, int rowIndex, int width) {
+    int[] currentRow = grid[rowIndex];
+    int[] updatedRow = new int[width];
+    for (int columnIndex = 0; columnIndex < width; columnIndex++) {
+      if (isAlive(columnIndex, currentRow) && canDie(rowIndex, columnIndex, grid)) {
+        killRowCell(columnIndex, updatedRow);
+      } else if (!isAlive(columnIndex, currentRow) && canRevive(rowIndex, columnIndex, grid)) {
+        reviveRowCell(columnIndex, updatedRow);
+      } else {
+        updatedRow[columnIndex] = currentRow[columnIndex];
+      }
+    }
+    return updatedRow;
+  }
+
+  private static void appendDeadCharacter(StringBuilder builder) {
+    builder.append(GameValues.DEAD_CELL_CHAR);
+  }
+
+  private static void appendAliveCharacter(StringBuilder builder) {
+    builder.append(GameValues.ALIVE_CELL_CHAR);
+  }
+
+  private static void appendNewRowCharacter(StringBuilder builder) {
+    builder.append(GameValues.NEW_ROW_CHAR);
+  }
+
+  private static void appendCorrespondingCharacter(int value, StringBuilder builder) {
+    if (value == GameValues.DEAD_CELL_INT) {
+      appendDeadCharacter(builder);
+    } else {
+      appendAliveCharacter(builder);
+    }
+  }
+
   private static int rightValue(int cellRowIndex, int cellColumnIndex, int[][] grid) {
     try {
       return grid[cellRowIndex][++cellColumnIndex];
@@ -114,41 +149,6 @@ public class GolGrid {
       return grid[--cellRowIndex][--cellColumnIndex];
     } catch (ArrayIndexOutOfBoundsException exception) {
       return 0;
-    }
-  }
-
-  private static int[] updateRowLife(int[][] grid, int rowIndex, int width) {
-    int[] currentRow = grid[rowIndex];
-    int[] updatedRow = new int[width];
-    for (int columnIndex = 0; columnIndex < width; columnIndex++) {
-      if (isAlive(columnIndex, currentRow) && canDie(rowIndex, columnIndex, grid)) {
-        killRowCell(columnIndex, updatedRow);
-      } else if (!isAlive(columnIndex, currentRow) && canRevive(rowIndex, columnIndex, grid)) {
-        reviveRowCell(columnIndex, updatedRow);
-      } else {
-        updatedRow[columnIndex] = currentRow[columnIndex];
-      }
-    }
-    return updatedRow;
-  }
-
-  private static void appendDeadCharacter(StringBuilder builder) {
-    builder.append(GameValues.DEAD_CELL_CHAR);
-  }
-
-  private static void appendAliveCharacter(StringBuilder builder) {
-    builder.append(GameValues.ALIVE_CELL_CHAR);
-  }
-
-  private static void appendNewRowCharacter(StringBuilder builder) {
-    builder.append(GameValues.NEW_ROW_CHAR);
-  }
-
-  private static void appendCorrespondingCharacter(int value, StringBuilder builder) {
-    if (value == GameValues.DEAD_CELL_INT) {
-      appendDeadCharacter(builder);
-    } else {
-      appendAliveCharacter(builder);
     }
   }
 
